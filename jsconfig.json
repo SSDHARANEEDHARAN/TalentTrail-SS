@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "@fontawsome/*": ["./public/assets/fontawsome/*"],
+      "@css/*": ["./public/assets/css/*"]
+    }
+  }
+}
