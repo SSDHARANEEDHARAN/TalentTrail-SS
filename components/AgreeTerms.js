@@ -17,7 +17,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
   const [lockout, setLockout] = useState(false); // Lockout state for 2 minutes
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
 
-  const correctPasskey = "Tharanee@25262001//SSTR//0610"; // The correct passkey
+  const correctPasskey = "Tharanee@25262001//SSTR//"; // The correct passkey
   const correctUsername = "TharaneeTharan"; // The correct username
 
   useEffect(() => {

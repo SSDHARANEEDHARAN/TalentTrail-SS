@@ -1,4 +1,4 @@
-// File: C:\Users\thara\Desktop\TEST-NEXT\app\portfolio\page.js
+// File: C:\Users\thara\Desktop\TalentTrail-SS\app\portfolio\page.js
 import * as entry from '../../../../app/portfolio/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

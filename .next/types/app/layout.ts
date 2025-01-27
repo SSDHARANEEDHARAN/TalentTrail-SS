@@ -1,4 +1,4 @@
-// File: C:\Users\thara\Desktop\TEST-NEXT\app\layout.js
+// File: C:\Users\thara\Desktop\TalentTrail-SS\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
