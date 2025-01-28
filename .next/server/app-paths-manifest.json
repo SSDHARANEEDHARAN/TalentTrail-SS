@@ -2,6 +2,5 @@
   "/page": "app/page.js",
   "/about/page": "app/about/page.js",
   "/services/page": "app/services/page.js",
-  "/portfolio/page": "app/portfolio/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/portfolio/page": "app/portfolio/page.js"
 }
