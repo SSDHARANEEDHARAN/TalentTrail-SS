@@ -17,7 +17,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
   const [lockout, setLockout] = useState(false); // Lockout state for 2 minutes
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
 
-  const correctPasskey = "//Tharan@25262001//SS//"; // The correct passkey
+  const correctPasskey = "//Tharan@25262001@SS//"; // The correct passkey
   const correctUsername = "TharaneeTharan"; // The correct username
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
           localStorage.setItem("failedAttempts", newFailedAttempts.toString());
 
           if (newFailedAttempts >= 3) {
-            const lockoutTime = new Date().getTime() + 50 * 60 * 1000; // 2 minutes in milliseconds
+            const lockoutTime = new Date().getTime() + 1150 * 60 * 1000; // 2 minutes in milliseconds
             setLockout(true);
             localStorage.setItem("lockout", "true");
             localStorage.setItem("lockoutTime", lockoutTime.toString());
@@ -89,7 +89,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
         }
         setLoading(false);
         setIsSubmitting(false);
-      }, 3000);
+      }, 2000);
     }
 
     if (step === 2) {
@@ -101,7 +101,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
           localStorage.setItem("accessGranted", "true");
           setLoading(false);
           setIsSubmitting(false);
-        }, 3000);
+        }, 2000);
       } else {
         setErrorMessage("You must agree to the Terms and Conditions.");
       }
