@@ -1,5 +1,3 @@
-"use client"; // Marking the component as a Client Component
-
 import { useState, useEffect } from "react";
 import Alert from "@mui/material/Alert"; // Material UI Alert for warnings
 
@@ -16,9 +14,13 @@ const AgreeTerms = ({ setAccessGranted }) => {
   const [failedAttempts, setFailedAttempts] = useState(0); // Track failed passkey attempts
   const [lockout, setLockout] = useState(false); // Lockout state for 2 minutes
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]); // State to store OTP
+  const [otpSent, setOtpSent] = useState(false); // State to track if OTP is sent
+  const [otpVerified, setOtpVerified] = useState(false); // State to track if OTP is verified
+  const [countdown, setCountdown] = useState(50); // Countdown timer for OTP
 
-  const correctPasskey = "//Tharan@25262001@SS//"; // The correct passkey
-  const correctUsername = "TharaneeTharan"; // The correct username
+  const correctPasskey = "//RAMYA//"; // The correct passkey
+  const correctUsername = "RAMYA"; // The correct username
 
   useEffect(() => {
     // Check if access has already been granted in localStorage
@@ -55,6 +57,13 @@ const AgreeTerms = ({ setAccessGranted }) => {
       }
     }
   }, [setAccessGranted]);
+
+  useEffect(() => {
+    if (otpSent && countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [otpSent, countdown]);
 
   const handlePasskeySubmit = (e) => {
     e.preventDefault();
@@ -97,14 +106,37 @@ const AgreeTerms = ({ setAccessGranted }) => {
         setLoading(true);
         setIsSubmitting(true);
         setTimeout(() => {
-          setAccessGranted(true);
-          localStorage.setItem("accessGranted", "true");
+          setOtpSent(true); // Simulate OTP sent
+          setCountdown(50); // Reset countdown
           setLoading(false);
           setIsSubmitting(false);
         }, 2000);
       } else {
         setErrorMessage("You must agree to the Terms and Conditions.");
       }
+    }
+  };
+
+  const handleOtpChange = (index, value) => {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 5) {
+      document.getElementById(`otp-${index + 1}`).focus();
+    }
+  };
+
+  const handleOtpSubmit = (e) => {
+    e.preventDefault();
+    const enteredOtp = otp.join("");
+    // Simulate OTP verification
+    if (enteredOtp === "123456") { // Replace with actual OTP verification logic
+      setOtpVerified(true);
+      setAccessGranted(true);
+      localStorage.setItem("accessGranted", "true");
+    } else {
+      setErrorMessage("Invalid OTP. Please try again.");
     }
   };
 
@@ -176,6 +208,8 @@ const AgreeTerms = ({ setAccessGranted }) => {
               <h3 style={{ marginBottom: "20px", color: "#4770ff" }}>
                 {step === 1
                   ? "Enter Your Username and Passkey"
+                  : otpSent
+                  ? "Enter OTP"
                   : "Agree to Terms and Conditions"}
               </h3>
 
@@ -243,7 +277,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
                 </div>
               )}
 
-              {step === 2 && !isSubmitting && (
+              {step === 2 && !otpSent && !isSubmitting && (
                 <div className="container">
                   <div
                     className="mb-3"
@@ -345,6 +379,56 @@ const AgreeTerms = ({ setAccessGranted }) => {
                   >
                     Agree and Submit
                   </button>
+                </div>
+              )}
+
+              {otpSent && (
+                <div className="container">
+                  <div
+                    className="mb-3"
+                    style={{ textAlign: "center", marginLeft: "20px" }}
+                  >
+                    <p style={{ color: "grey" }}>
+                      Enter the OTP sent to your email.
+                    </p>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "10px",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {otp.map((digit, index) => (
+                        <input
+                          key={index}
+                          type="text"
+                          id={`otp-${index}`}
+                          className="form-control"
+                          value={digit}
+                          onChange={(e) => handleOtpChange(index, e.target.value)}
+                          maxLength="1"
+                          style={{ width: "40px", textAlign: "center" }}
+                        />
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleOtpSubmit}
+                      disabled={otp.includes("") || otpVerified}
+                    >
+                      Submit OTP
+                    </button>
+
+                    <p style={{ color: "grey", marginTop: "10px" }}>
+                      {countdown > 0
+                        ? `Resend OTP in ${countdown} seconds`
+                        : "OTP expired. Please resend."}
+                    </p>
+                  </div>
                 </div>
               )}
 

@@ -73,7 +73,7 @@ const FolioLayout = ({ children, homePage = false }) => {
               className="btn btn-logout"
               style={{
                 width: "100%", // Full width of the container
-                maxWidth: "1115px", // Restrict max width for larger screens
+                maxWidth: "1300px", // Restrict max width for larger screens
                 padding: "10px 1px", // Padding for touch-friendly design
               }}
             >
