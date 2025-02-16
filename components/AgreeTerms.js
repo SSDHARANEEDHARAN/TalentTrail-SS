@@ -19,8 +19,8 @@ const AgreeTerms = ({ setAccessGranted }) => {
   const [otpVerified, setOtpVerified] = useState(false); // State to track if OTP is verified
   const [countdown, setCountdown] = useState(50); // Countdown timer for OTP
 
-  const correctPasskey = "//RAMYA//"; // The correct passkey
-  const correctUsername = "RAMYA"; // The correct username
+  const correctPasskey = "SSTHARANEE"; // The correct passkey
+  const correctUsername = "THARANEE252001"; // The correct username
 
   useEffect(() => {
     // Check if access has already been granted in localStorage
