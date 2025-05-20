@@ -20,7 +20,7 @@ const AgreeTerms = ({ setAccessGranted }) => {
   const [countdown, setCountdown] = useState(50); // Countdown timer for OTP
 
   const correctPasskey = "SSTHARANEE"; // The correct passkey
-  const correctUsername = "THARANEE"; // The correct username
+  const correctUsername = "THARANEE25"; // The correct username
 
   useEffect(() => {
     // Check if access has already been granted in localStorage
